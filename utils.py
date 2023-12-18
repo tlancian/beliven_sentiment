@@ -5,34 +5,24 @@ from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import PorterStemmer
 
+# Download NLTK resources
 nltk.download('stopwords')
 nltk.download('punkt')
 
-
-
-
-
-
-
 def clean_review(text):
-    # Define a regular expression pattern to match non-alphanumeric characters (including standard punctuation and parentheses)
-    
+    # Replace HTML line breaks with a space
     pattern1 = "<br /><br />"
-
-    pattern2 = r'[^a-zA-Z0-9\s.,!?;:"\'()\-]'  # Include standard punctuation characters and parentheses
-    
-    pattern3 = r'\s+'
-
-
     text = re.sub(pattern1, ' ', text)
+    
+    # Remove non-alphanumeric characters (including standard punctuation and parentheses)
+    pattern2 = r'[^a-zA-Z0-9\s.,!?;:"\'()\-]'
     text = re.sub(pattern2, ' ', text)
+    
+    # Replace multiple whitespaces with a single space
+    pattern3 = r'\s+'
     cleaned_text = re.sub(pattern3, ' ', text)
 
     return cleaned_text
-
-
-
-
 
 
 
@@ -118,29 +108,17 @@ contractions_dict = {
 }
 
 def expand_contractions(text):
+    # Replace contractions with their expanded forms
     for contraction, expanded_form in contractions_dict.items():
         pattern = r'\b' + re.escape(contraction) + r'\b'
         text = re.sub(pattern, expanded_form, text)
     return text
 
-
-
-
-
-
-
-
-
-
-
-
-
 def text_cleaner(text):
-
-
-
+    # Convert text to lowercase
     text = text.lower()
 
+    # Expand contractions
     text = expand_contractions(text)
     
     # Remove HTML tags
@@ -149,10 +127,10 @@ def text_cleaner(text):
     # Remove URLs
     text = re.sub(r'http\S+|www\S+|https\S+', ' ', text, flags=re.MULTILINE)
 
-    # Remove special characters, numbers
+    # Remove special characters and numbers
     text = re.sub(r'[^a-zA-Z\s]', ' ', text)
 
-    #Remove multiple whitespaces
+    # Remove multiple whitespaces
     text = re.sub(r'\s+', ' ', text)
 
     # Tokenize the text into words
@@ -166,6 +144,4 @@ def text_cleaner(text):
     stemmer = PorterStemmer()
     stemmed_words = [stemmer.stem(word) for word in filtered_words]
 
-
-    
     return filtered_words
