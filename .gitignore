@@ -204,7 +204,7 @@ cython_debug/
 # Build files
 /build/
 /output/
-*.pdf
+
 
 # Temporary files
 *.swp
