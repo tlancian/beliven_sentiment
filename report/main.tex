@@ -1,0 +1,42 @@
+\documentclass[12pt]{article}
+\usepackage[a4paper, margin=1in]{geometry}
+
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{libertine}
+\usepackage{libertinust1math}
+\usepackage{graphicx}
+\usepackage{subcaption}
+\usepackage{geometry}
+\usepackage{booktabs}
+
+\newcommand{\spara}[1]{\smallskip\noindent{\bf #1}}
+
+\renewcommand{\rmdefault}{\sfdefault}
+
+\title{IMDb Movie Reviews Classification Task Report}
+\author{Tommaso Lanciano}
+\date{}
+
+\begin{document}
+\maketitle
+
+
+The IMDb Large Movie Review Dataset \cite{maas2011data} is widely recognized as a benchmark for sentiment classification in the literature. In this project, we explore various machine learning approaches to achieve optimal results in a supervised learning task. The task involves analyzing the collection of movie reviews provided by the dataset and developing a model capable of determining whether a review is positively or negatively inclined.
+
+We will begin by providing a description of the dataset. Subsequently, we will detail the pipeline used for preprocessing the data to prepare it for feeding into a machine learning classifier, and we will discuss the choice of classifiers. Finally, we will analyze the results obtained.
+
+
+\input{eda.tex}
+\input{preprocessing.tex}
+\input{embeddings.tex}
+\input{models.tex}
+\input{results.tex}
+
+
+
+\bibliographystyle{plain}
+\bibliography{biblio}
+
+
+\end{document}

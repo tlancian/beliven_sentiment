@@ -1,0 +1,8 @@
+Embedder: b
+Embedder Size: 5000
+Classifier: nb
+Classifier Params: {'classifier__alpha': 1.0, 'classifier__fit_prior': True}
+Accuracy: 0.83728
+Precision: 0.8599112173467646
+Recall: 0.80584
+F1 Score: 0.8319980176757248

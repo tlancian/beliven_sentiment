@@ -1,0 +1,29 @@
+\section{Preprocessing}
+
+To fully leverage the information embedded in the text of each review, effective preprocessing is an indispensable step. The objective of this stage in the pipeline is to filter out irrelevant information that introduces noise to the data, while retaining the distinctive characteristics of the text. From a technical point of view, the goal here is to extract a set of words from the text, which will be utilized in crafting an embedding for the review into a multidimensional space. This embedding serves as the input for any subsequent machine learning classifier. Let's briefly review the key steps undertaken in the preprocessing phase. The detailed steps of this preprocessing pipeline are outlined below:
+
+
+\begin{enumerate}
+
+    \item \textbf{Punctuation Removal:} The initial step involves eliminating punctuation marks from the text. This process ensures that only words are retained in the pipeline, as punctuation has a minor influence on the overall meaning of the sentence.
+
+    \item \textbf{HTML Tag and URLs Removal:} This step focuses on stripping off all text with no specific semantic meaning. It includes the removal of HTML tags and any URLs mentioned in the reviews. Two distinct regular expressions are employed for this purpose.
+
+    \item \textbf{Lowercasing:} Convert all words in the text to lowercase. This ensures uniformity among words and eliminates discrepancies arising from variations in casing, providing standardized input for subsequent processing.
+
+    \item \textbf{Expansion of Contracted Forms:} 
+    Expand contracted forms (e.g., "cannot" or "will not") and common slang forms (e.g., "going to" or "kind of") to their full forms. This step promotes consistency and is beneficial for the subsequent stopword removal step, as it brings back contracted words to their full form. Expansion is performed by checking words in the review against a handcrafted list from various web sources.
+
+    \item \textbf{Stopword Removal:} Tokenize the text to work at the word level and remove common stopwords (e.g., "the," "and," "is"). This minimizes noise in the feature space, focusing the model on more meaningful content during sentiment analysis.
+
+    \item \textbf{Stemming:} Implement stemming techniques to reduce words to their base or root form. Stemming involves removing prefixes or suffixes from words, aiming to capture the core meaning and consolidate variations. 
+
+\end{enumerate}
+
+This preprocessing pipeline is designed to refine and standardize textual data, establishing a robust foundation for the development of an effective text classifier. To illustrate, we present the transformation of the previous sample review through the preprocessing pipeline:
+
+
+\begin{quote}
+    \textit{['world', 'stage', 'people', 'actors', 'something', 'like', 'hell', 'said', 'theatre', 'stopped', 'orchestra', 'pit', 'even', 'theatre', 'door', 'audience', 'participants', 'theatrical', 'experience', 'including', 'story', 'film', 'grand', 'experiment', 'said', 'hey', 'story', 'needs', 'attention', 'needs', 'active', 'participation', 'sometimes', 'bring', 'story', 'sometimes', 'go', 'story', 'alas', 'one', 'listened', 'mean', 'said']
+    }
+\end{quote}

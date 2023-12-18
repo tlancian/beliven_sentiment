@@ -1,0 +1,8 @@
+Embedder: b
+Embedder Size: 10000
+Classifier: lr
+Classifier Params: {'classifier__C': 1, 'classifier__max_iter': 1000, 'classifier__penalty': 'l2', 'classifier__solver': 'saga'}
+Accuracy: 0.86728
+Precision: 0.8644807875516037
+Recall: 0.87112
+F1 Score: 0.8677876952502391

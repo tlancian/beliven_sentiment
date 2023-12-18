@@ -1,0 +1,46 @@
+\section{Experimental Procedure}
+
+
+After discussing and identifying important pre-processing steps for turning reviews into numerical data, we are ready to create a sentiment classification model for identifying sentiments in reviews.
+Considering the limitations in time and resources, we have chosen a pipeline that prioritizes the efficient exploration of a diverse range of models and their respective parameter spaces, rather than delving deeply into the performance analysis of a single model.
+The steps of our pipeline are the following:
+
+
+\begin{enumerate}
+    \item \textbf{Embedding Learning on Entire Training Set:} to begin, we performed embedding learning on our entire training dataset. This crucial step involved capturing the inherent representations of the data, thereby improving our capacity to extract meaningful patterns and features. For this process, we utilized one of the models outlined in Section~\ref{sec:embeddings}, focusing our tuning efforts solely on the number of features produced/retained in the output (see Table~\ref{tab:emb_params}).
+
+
+    \item \textbf{Subsampling with Proportional Representation:} after the embedding phase, we conducted subsampling on the training set, considering a reduced portion (20\% of the dataset). This subsample maintained equal proportions of positive and negative reviews, aiming to create a subset that is representative of the entire dataset. The goal was to enable a more efficient training process across a diverse range of models and parameters.
+        
+    \item \textbf{Machine Learning Classifier Training with Grid Search:} the subsampled dataset was employed to train a machine learning classifier, choosing from three options: Logistic Regression, Naive Bayes, and SVM. To optimize their performance, we utilized a grid search approach, systematically exploring a predefined set of hyperparameters to identify the optimal configuration (see Table~\ref{tab:clf_params}). Furthermore, a 4-fold cross-validation strategy was implemented to robustly assess the model's performance across various subsets of the data. After the grid search, we pinpointed the top 5 models based on the average F1 Score across different folds. 
+
+    \item \textbf{Final Model Training and Selection:} the top 5 models selected from the grid search were then trained on the entire original training set. This comprehensive training phase aimed to provide a more accurate representation of the models' capabilities on the complete dataset. Ultimately, we chose the best-performing model based on their F1 Scores obtained from the test set.
+
+\end{enumerate}
+
+We present the parameter grids used for the embedders and classifiers in Tables~\ref{tab:emb_params} and~\ref{tab:clf_params}. All parameters not explicitly mentioned were kept at their default values in the Python implementation.
+
+
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{cc}
+    \textbf{\begin{tabular}[c]{@{}c@{}}Bag-of-Words\\ TF-IDF\end{tabular}} & max\_features: {[}1000, 3000, 5000, 10000{]} \\ \hline
+    \textbf{\begin{tabular}[c]{@{}c@{}}Word2Vec\\ FastText\end{tabular}}   & vector\_size: {[}100, 300, 500, 1000{]}
+    \end{tabular}
+    \caption{Grid search for embedders' parameters.}
+    \label{tab:emb_params}
+\end{table}
+
+
+
+\begin{table}[h]
+    \centering
+    \begin{tabular}{cc}
+    \textbf{Logistic Regression} & \begin{tabular}[c]{@{}c@{}}C: {[}0.1, 1, 10{]}\\ penalty: {[}"l1", "l2"{]}\end{tabular}                                       \\ \hline
+    \textbf{SVM}                 & \begin{tabular}[c]{@{}c@{}}kernel: {[}'linear', 'rbf'{]}\\ C: {[}0.1, 1, 10{]}\\ gamma: {[}1, 'scale', 'auto'{]}\end{tabular} \\ \hline
+    \textbf{Naive Bayes}         & \begin{tabular}[c]{@{}c@{}}alpha: {[}0.1, 1, 10{]}\\ fit\_prior: {[}False, True{]}\end{tabular}                              
+    \end{tabular}
+    \caption{Grid search for classifiers' parameters.}
+    \label{tab:clf_params}
+\end{table}

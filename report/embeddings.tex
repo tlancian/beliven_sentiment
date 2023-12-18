@@ -1,0 +1,97 @@
+
+\section{Feature Extraction}
+\label{sec:embeddings}
+
+At this stage of the pipeline, once obtained a set of relevant words for each review, it becomes crucial to convert textual data into numerical vectors, enabling the application of mathematical operations and algorithms for the text classification task. In Natural Language Processing (NLP), two main approaches stand out: vector space models and word embeddings.
+
+
+\subsection{Vector Space Models}
+
+A Vector Space Model serves as a mathematical representation in natural language processing and information retrieval, portraying textual information. Documents or terms are depicted as vectors in a multi-dimensional space, with each dimension corresponding to a unique term in the dataset. These models form the basis for quantitatively analyzing textual data, facilitating efficient and scalable processing of large text corpora.
+
+
+\subsubsection{Bag-of-Words (BoW)}
+
+Within Vector Space Models, the Bag-of-Words (BoW) representation is fundamental. BoW disregards word order in a document, focusing solely on term frequency. It involves creating a vocabulary from unique terms in the dataset, representing each document as a vector. This vector's dimensions correspond to vocabulary terms, indicating term frequencies. Despite its simplicity, BoW is widely used in NLP due to its interpretability and ease of implementation.
+
+Let $D$ be a document, $V$ the vocabulary, and $X_{\text{BoW}}$ the Bag-of-Words vector. $X_{\text{BoW}}(w_i)$ denotes the frequency of word $w_i$ in $D$:
+
+\[
+X_{\text{BoW}}(w_i) = \text{count}(w_i, D)
+\]
+
+Here, $\text{count}(w_i, D)$ represents the occurrences of $w_i$ in $D$.
+
+\subsubsection{Term Frequency-Inverse Document Frequency (TF-IDF)}
+
+BoW captures term frequency but neglects term importance in the corpus. TF-IDF addresses this by considering both term frequency and inverse document frequency, assigning higher weights to terms that are frequent in a document but rare in the corpus.
+
+The Term Frequency (TF) of $w_i$ in $D$ is:
+
+\[
+\text{TF}(w_i, D) = \frac{\text{count}(w_i, D)}{\text{total words in } D}
+\]
+
+The Inverse Document Frequency (IDF) of $w_i$ in the corpus is:
+
+\[
+\text{IDF}(w_i, \text{corpus}) = \log\left(\frac{\text{total docs in corpus}}{\text{docs containing } w_i + 1}\right)
+\]
+
+The TF-IDF score for $w_i$ in $D$ is:
+
+\[
+\text{TF-IDF}(w_i, D, \text{corpus}) = \text{TF}(w_i, D) \times \text{IDF}(w_i, \text{corpus})
+\]
+
+The resulting TF-IDF scores form the TF-IDF vector $X_{\text{TF-IDF}}$ for $D$.
+
+
+
+
+
+
+
+
+
+
+
+
+\subsection{Word Embeddings}
+
+Word embeddings are dense vector representations that position words in a continuous vector space, capturing semantic relationships through their contextual usage. The features within this framework are latent features crafted by the model.
+These embeddings play a crucial role in encapsulating the semantic meaning of words, enhancing our comprehension of language.
+Nonetheless, an essential step is required to aggregate these word embeddings effectively in order to derive a comprehensive representation of a document. This aggregation process is imperative to transform individual word representations into a cohesive and meaningful portrayal of the entire document. In our approach, we will employ the average of all the word embeddings included in the review for this aggregation, ensuring a holistic representation.
+
+
+
+\subsubsection{Word2Vec}
+
+Word2Vec, abbreviated as Word to Vector, is a influential word embedding technique introduced by Google in 2013. Its significance lies in representing words as vectors in a continuous vector space, capturing semantic relationships. The algorithm employs two primary architectures: Skip-gram and Continuous Bag of Words (CBOW). Skip-gram predicts context words for a target word, adept at capturing linguistic nuances, while CBOW predicts a target word based on its context. Both architectures use a shallow neural network to produce embeddings.
+
+One notable feature of Word2Vec is its ability to produce contextually rich representations for words, enabling the model to understand and generalize linguistic nuances. As a result, words with similar meanings end up with similar vector representations in the learned space. This property makes Word2Vec an effective tool for tasks such as word similarity, analogy completion, and even detecting semantic relationships between words.
+
+In conclusion, Word2Vec has significantly shaped the landscape of NLP by providing a robust method for representing words in a way that preserves their semantic meaning.
+
+
+
+
+
+
+
+
+
+\subsubsection{FastText}
+
+
+FastText, developed by Facebook's AI Research (FAIR) lab in 2016, is a cutting-edge word embedding technique that builds upon the foundations laid by Word2Vec. This method extends the concept of word embeddings to include subword information, allowing it to capture morphological structures and handle out-of-vocabulary words more effectively.
+
+At its core, FastText represents words as bags of character $n$-grams, where $n$ can range from individual characters to entire words. This subword information is crucial for handling morphologically rich languages and dealing with rare or unseen words. By considering subword units, FastText enhances its ability to represent the internal structure of words, making it adept at encoding morphological variations.
+
+Similar to Word2Vec, FastText employs the Skip-gram model and the Continuous Bag of Words (CBOW) model. FastText, however, extends these architectures to operate on subword levels, contributing to its robustness in capturing intricate linguistic patterns.
+
+FastText excels in scenarios where Word2Vec may struggle, such as handling rare words or morphologically complex languages. The ability to generate embeddings for subword units enables FastText to provide more informative representations, particularly useful in tasks like language modeling, text classification, and sentiment analysis.
+
+A notable advantage of FastText lies in its capacity to generate embeddings for entire words based on their constituent subword units. This not only enhances performance on morphologically diverse languages but also facilitates the handling of previously unseen words during inference.
+
+

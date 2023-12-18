@@ -1,0 +1,8 @@
+Embedder: w
+Embedder Size: 300
+Classifier: svm
+Classifier Params: {'classifier__C': 10, 'classifier__gamma': 1, 'classifier__kernel': 'linear'}
+Accuracy: 0.83048
+Precision: 0.8301102764903309
+Recall: 0.83104
+F1 Score: 0.8305748780682819

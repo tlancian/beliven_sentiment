@@ -1,0 +1,8 @@
+Embedder: t
+Embedder Size: 10000
+Classifier: svm
+Classifier Params: {'classifier__C': 10, 'classifier__gamma': 'scale', 'classifier__kernel': 'rbf'}
+Accuracy: 0.87792
+Precision: 0.8828821526989787
+Recall: 0.87144
+F1 Score: 0.8771237619776149
